@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive CSS Lecture</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark {
+            background-color: #121212;
+            color: #ddd;
+        }
+
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 { font-size: 2rem; margin-bottom: 5px; }
+        header p { font-size: 1rem; opacity: 0.8; }
+
+        .container { display: flex; max-width: 1200px; margin: 30px auto; }
+
+        /* Sidebar Navigation */
+        nav {
+            width: 220px;
+            position: sticky;
+            top: 80px;
+            align-self: flex-start;
+            margin-right: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+        }
+
+        body.dark nav { background-color: #1f1f1f; }
+
+        nav a {
+            display: block;
+            padding: 10px 0;
+            color: #4a90e2;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: #357ABD; }
+
+        /* Main Content */
+        main { flex: 1; }
+
+        section { margin-bottom: 40px; }
+        h2 { color: #4a90e2; margin-bottom: 15px; border-bottom: 2px solid #e0e0e0; padding-bottom: 5px; }
+        body.dark h2 { color: #8ab4f8; border-color: #444; }
+
+        p, ul { margin-bottom: 10px; }
+        ul li { margin-left: 20px; margin-bottom: 5px; }
+
+        /* Code Editor Style */
+        pre {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 15px;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+
+        body.dark pre { background-color: #2b2b2b; }
+
+        .code-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #333;
+            color: white;
+            font-size: 0.9rem;
+            padding: 3px 10px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            border-bottom: 1px solid #444;
+        }
+
+        body.dark .code-header { background: #555; border-color: #666; }
+
+        /* Exercise Box */
+        .exercise {
+            background-color: #e8f4ff;
+            padding: 15px;
+            border-left: 5px solid #4a90e2;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        body.dark .exercise { background-color: #1e2a3a; border-color: #8ab4f8; }
+
+        /* Buttons */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #fff;
+            color: #4a90e2;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover { background-color: #f0f0f0; }
+
+        body.dark .theme-toggle {
+            background-color: #333;
+            color: #8ab4f8;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) { .container { flex-direction: column; } nav { width: 100%; margin-bottom: 20px; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Interactive CSS Lecture</h1>
+        <p>Professional & Modern Teaching Tool</p>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav>
+            <a href="#intro">Introduction</a>
+            <a href="#selectors">Selectors</a>
+            <a href="#boxmodel">Box Model</a>
+            <a href="#flexbox">Flexbox</a>
+            <a href="#project">Mini Project</a>
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            <section id="intro">
+                <h2>1. Introduction to CSS</h2>
+                <p>CSS (Cascading Style Sheets) styles HTML elements. It adds colors, typography, layouts, and more.</p>
+                <pre><div class="code-header">HTML</div>&lt;p style="color: red;"&gt;Red Text&lt;/p&gt;</pre>
+                <pre><div class="code-header">CSS</div>p { color: blue; font-size: 16px; }</pre>
+                <div class="exercise"><strong>Exercise:</strong> Create a paragraph and style it red using inline CSS.</div>
+            </section>
+
+            <section id="selectors">
+                <h2>2. CSS Selectors</h2>
+                <pre><div class="code-header">CSS</div>
+/* Element Selector */ 
+p { color: purple; }
+
+/* Class Selector */ 
+.highlight { background-color: yellow; }
+
+/* ID Selector */ 
+#main { font-size: 20px; }
+
+/* Group Selector */ 
+h1, h2, h3 { font-family: Arial; }
+                </pre>
+                <div class="exercise"><strong>Exercise:</strong> Create an <code>&lt;h1&gt;</code> and <code>&lt;p&gt;</code> and style using ID and class.</div>
+            </section>
+
+            <section id="boxmodel">
+                <h2>3. CSS Box Model</h2>
+                <ul>
+                    <li>Content</li>
+                    <li>Padding</li>
+                    <li>Border</li>
+                    <li>Margin</li>
+                </ul>
+                <pre><div class="code-header">CSS</div>
+.box {
+  width: 200px;
+  padding: 20px;
+  border: 2px solid black;
+  margin: 30px;
+  background-color: lightgray;
+}
+                </pre>
+                <div class="exercise"><strong>Exercise:</strong> Adjust padding, border, margin to see the effect.</div>
+            </section>
+
+            <section id="flexbox">
+                <h2>4. CSS Flexbox</h2>
+                <pre><div class="code-header">HTML</div>
+&lt;div class="container"&gt;
+  &lt;div class="box"&gt;1&lt;/div&gt;
+  &lt;div class="box"&gt;2&lt;/div&gt;
+  &lt;div class="box"&gt;3&lt;/div&gt;
+&lt;/div&gt;</pre>
+                <pre><div class="code-header">CSS</div>
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.box {
+  width: 50px;
+  height: 50px;
+  background: teal;
+  color: white;
+  text-align: center;
+}
+                </pre>
+                <div class="exercise"><strong>Exercise:</strong> Create 4 boxes and use <code>justify-content: space-between;</code></div>
+            </section>
+
+            <section id="project">
+                <h2>5. Mini Project: Profile Card</h2>
+                <pre><div class="code-header">HTML</div>
+&lt;div class="profile-card"&gt;
+  &lt;img src="profile.jpg" class="profile-img"&gt;
+  &lt;h2&gt;John Doe&lt;/h2&gt;
+  &lt;p&gt;Software Engineer&lt;/p&gt;
+  &lt;button&gt;Follow&lt;/button&gt;
+&lt;/div&gt;</pre>
+
+                <pre><div class="code-header">CSS</div>
+.profile-card {
+  width: 250px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
+.profile-img {
+  width: 100px;
+  border-radius: 50%;
+}
+button {
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+                </pre>
+                <div class="exercise"><strong>Exercise:</strong> Add hover effect to button and change card background color.</div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const btn = document.querySelector('.theme-toggle');
+            btn.textContent = document.body.classList.contains('dark') ? '☀️ Light Mode' : '🌙 Dark Mode';
+        }
+    </script>
+</body>
+</html>
